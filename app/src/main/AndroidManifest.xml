@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,6 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestAppEmo"
         tools:targetApi="31">
+        <activity
+            android:name=".ShopActivity"
+            android:exported="false"
+            android:label="@string/title_activity_shop">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

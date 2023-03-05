@@ -1,5 +1,6 @@
 package com.example.testappemo
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -13,6 +14,7 @@ import com.example.testappemo.fragment.FragmentCloseInterface
 import com.example.testappemo.fragment.LoginFragment
 import com.example.testappemo.model.User
 
+
 class MainActivity : AppCompatActivity(), FragmentCloseInterface {
     lateinit var binding: ActivityMainBinding
     private lateinit var loginFragment: LoginFragment
@@ -24,6 +26,9 @@ class MainActivity : AppCompatActivity(), FragmentCloseInterface {
 
         val view = binding.root
         setContentView(view)
+
+        //hide toolbar
+        supportActionBar?.hide()
 
         //Database
         db = AppDatabase.getDb(this)
@@ -56,6 +61,7 @@ class MainActivity : AppCompatActivity(), FragmentCloseInterface {
                     db.userDao().insertAll(user)
                 }.start()
             }
+            startActivity(Intent(this, ShopActivity::class.java))
         }
     }
 
