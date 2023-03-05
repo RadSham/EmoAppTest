@@ -1,33 +1,53 @@
 package com.example.testappemo
 
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.lifecycle.asLiveData
+import com.example.testappemo.data.AppDatabase
 import com.example.testappemo.databinding.ActivityMainBinding
+import com.example.testappemo.fragment.FragmentCloseInterface
+import com.example.testappemo.fragment.LoginFragment
+import com.example.testappemo.model.User
 
 class MainActivity : AppCompatActivity(), FragmentCloseInterface {
-    lateinit var rootElement: ActivityMainBinding
-    lateinit var loginFragment: LoginFragment
+    lateinit var binding: ActivityMainBinding
+    private lateinit var loginFragment: LoginFragment
+    private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rootElement = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        val view = rootElement.root
+        val view = binding.root
         setContentView(view)
 
-        rootElement.tvLogin.setOnClickListener {
+        //Database
+        db = AppDatabase.getDb(this)
+        db.userDao().getAllUsers().asLiveData().observe(this){
+            Log.d("MyLog", "db.userDao().getAllUsers() $it")
+        }
+
+
+        binding.tvLogin.setOnClickListener {
             loginFragment = LoginFragment(this)
-            rootElement.mainLinearLayout.visibility = View.GONE
+            binding.mainLinearLayout.visibility = View.GONE
             val fm = this.supportFragmentManager.beginTransaction()
             fm.replace(R.id.placeholder, loginFragment)
             fm.commit()
         }
+
+        binding.btnSignIn.setOnClickListener{
+            val user = User(null, binding.etUserName.text.toString(), binding.etMainPassword.text.toString(), binding.etEmail.text.toString())
+            Thread{
+                db.userDao().insertAll(user)
+            }.start()
+        }
     }
 
     override fun onFragClose() {
-        rootElement.mainLinearLayout.visibility = View.VISIBLE
+        binding.mainLinearLayout.visibility = View.VISIBLE
     }
 
 }

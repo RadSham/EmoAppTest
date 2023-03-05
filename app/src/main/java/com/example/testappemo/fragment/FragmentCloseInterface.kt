@@ -1,4 +1,4 @@
-package com.example.testappemo
+package com.example.testappemo.fragment
 
 interface FragmentCloseInterface {
     fun onFragClose()

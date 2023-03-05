@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    tools:context=".fragment.LoginFragment">
 
     <LinearLayout
         android:id="@+id/mainLinearLayout"
@@ -15,7 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5px">
+            android:layout_margin="5dp">
 
             <TextView
                 android:id="@+id/tvWelcomeBack"
