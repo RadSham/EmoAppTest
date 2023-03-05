@@ -1,9 +1,11 @@
 package com.example.testappemo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import com.example.testappemo.data.AppDatabase
 import com.example.testappemo.databinding.ActivityMainBinding
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity(), FragmentCloseInterface {
             Log.d("MyLog", "db.userDao().getAllUsers() $it")
         }
 
-
+        //LogIn Link
         binding.tvLogin.setOnClickListener {
             loginFragment = LoginFragment(this)
             binding.mainLinearLayout.visibility = View.GONE
@@ -38,11 +40,22 @@ class MainActivity : AppCompatActivity(), FragmentCloseInterface {
             fm.commit()
         }
 
+
+        //Sign In Button
         binding.btnSignIn.setOnClickListener{
-            val user = User(null, binding.etUserName.text.toString(), binding.etMainPassword.text.toString(), binding.etEmail.text.toString())
-            Thread{
-                db.userDao().insertAll(user)
-            }.start()
+            if (!Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text).matches()){
+                Toast.makeText(this, "Введите корректный email", Toast.LENGTH_LONG).show()}
+            else {
+                val user = User(
+                    null,
+                    binding.etUserName.text.toString(),
+                    binding.etMainPassword.text.toString(),
+                    binding.etEmail.text.toString()
+                )
+                Thread {
+                    db.userDao().insertAll(user)
+                }.start()
+            }
         }
     }
 
