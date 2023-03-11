@@ -21,7 +21,7 @@ class ShopActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         //set menu at toolbar
-        binding.layoutToolbar.tbShop.inflateMenu(R.menu.main_tb_menu)
+        binding.layoutToolbar.tbShop.inflateMenu(R.menu.shop_tb_menu)
 
         val navView: BottomNavigationView = binding.navView
 
