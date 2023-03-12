@@ -7,23 +7,23 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="114dp"
-        android:layout_height="149dp"
+        android:layout_width="174dp"
+        android:layout_height="221dp"
         app:srcCompat="@drawable/example1" />
 
     <ImageView
-        android:layout_width="114dp"
-        android:layout_height="149dp"
+        android:layout_width="174dp"
+        android:layout_height="221dp"
         app:srcCompat="@drawable/example1" />
 
     <ImageView
-        android:layout_width="114dp"
-        android:layout_height="149dp"
+        android:layout_width="174dp"
+        android:layout_height="221dp"
         app:srcCompat="@drawable/example1" />
 
     <ImageView
-        android:layout_width="114dp"
-        android:layout_height="149dp"
+        android:layout_width="174dp"
+        android:layout_height="221dp"
         app:srcCompat="@drawable/example1" />
 </LinearLayout>
 

@@ -26,5 +26,3 @@
         android:layout_height="149dp"
         app:srcCompat="@drawable/example1" />
 </LinearLayout>
-
-
