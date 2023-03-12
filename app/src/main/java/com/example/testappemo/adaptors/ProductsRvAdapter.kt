@@ -1,9 +1,10 @@
 package com.example.testappemo.adaptors
 
-import android.util.Log
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.testappemo.R
 import com.example.testappemo.databinding.SingleProductBinding
 import com.example.testappemo.model.Product
 
@@ -13,7 +14,6 @@ class ProductsRvAdapter : RecyclerView.Adapter<ProductsRvAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             SingleProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        Log.d("MyLog", "onCreateViewHolder")
         return ViewHolder(binding)
     }
 
@@ -31,13 +31,24 @@ class ProductsRvAdapter : RecyclerView.Adapter<ProductsRvAdapter.ViewHolder>() {
                 productCategorySingleProduct.text = product.category
                 productNameSingleProduct.text = product.name
                 productPriceSingleProduct.text = product.price
+                if (product.image==null) productImageSingleProduct.setImageResource(R.drawable.example1)
+                else productImageSingleProduct.setImageBitmap(product.image)
             }
         }
     }
 
-    fun updateAdapter(newList: List<Product>) {
+    private fun updateAdapter(newList: List<Product>) {
+        productsArray.clear()
         productsArray.addAll(newList)
         notifyDataSetChanged()
+    }
+
+    fun updateUIAdapter(activity: Activity, list: ArrayList<Product>){
+        activity.runOnUiThread{
+            kotlin.run {
+                updateAdapter(list)
+            }
+        }
     }
 
 
